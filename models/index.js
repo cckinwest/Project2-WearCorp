@@ -3,7 +3,7 @@ const Product = require('./Product');
 const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
-//const OrderTag = require('./OrderTag');
+const OrderTag = require('./OrderTag');
 const User = require('./User');
 
 // Products belongsTo Category
@@ -19,14 +19,14 @@ Product.belongsToMany(Tag, {
 Tag.belongsToMany(Product, {
   through: ProductTag,
 });
-/*
+
 User.belongsToMany(Product, {
   through: OrderTag,
 });
 
 Product.belongsToMany(User, {
   through: OrderTag,
-});*/
+});
 
 module.exports = {
   Product,
