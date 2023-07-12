@@ -44,7 +44,7 @@ const seedAll = async () => {
 
   await seedProductTags();
 
-  await seedUsers();
+  //await seedUsers();
 
   process.exit(0);
 };
