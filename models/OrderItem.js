@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection');
 
-class OrderTag extends Model {}
+class OrderItem extends Model {}
 
-OrderTag.init(
+OrderItem.init(
   {
     // define columns
     id: {
@@ -17,6 +17,10 @@ OrderTag.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    unit_value: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
     product_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -24,10 +28,10 @@ OrderTag.init(
         key: 'id',
       },
     },
-    user_id: {
+    order_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
+        model: 'order',
         key: 'id',
       },
     },
@@ -37,8 +41,8 @@ OrderTag.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'orderTag',
+    modelName: 'orderItem',
   }
 );
 
-module.exports = OrderTag;
+module.exports = OrderItem;
