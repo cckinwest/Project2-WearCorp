@@ -1,0 +1,25 @@
+<!-- product-page.hbs -->
+
+{{!-- Header --}}
+<header>
+</header>
+
+{{!-- Product Details --}}
+<main style="background-color: #FFE569">
+  {{#each products}}
+  {{#if (ifEquals this.id selectedProductId)}}
+  <div class="product-details">
+    <h2>{{product_name}}</h2>
+    <p>Price: £{{price}}</p>
+    <p>Stock: {{stock}}</p>
+    <p>Description:</p>
+    <p>Category ID: {{category_id}}</p>
+  </div>
+  {{/if}}
+  {{/each}}
+</main>
+
+{{!-- Footer --}}
+<footer>
+  <!-- Footer content here -->
+</footer>
