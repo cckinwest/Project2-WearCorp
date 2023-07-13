@@ -55,6 +55,16 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
+router.get('/basket', async (req, res) => {
+  try {
+    res.render('basket', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/category', async (req, res) => {});
 /*
 // Use withAuth middleware to prevent access to route
