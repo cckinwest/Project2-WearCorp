@@ -29,19 +29,25 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/product/:id', async (req, res) => {
   try {
-    const projectData = await Project.findByPk(req.params.id, {
+    const productId = req.params.id;
+    const productData = await Product.findByPk(productId, {
       include: [
         {
-          model: User,
-          attributes: ['name'],
+          model: Category,
+          attributes: ['category_name'],
         },
       ],
     });
 
-    const project = projectData.get({ plain: true });
+    if (!productData) {
+      res.status(404).json({ message: 'Product not found' });
+      return;
+    }
+
+    const product = productData.get({ plain: true });
 
     res.render('product', {
-      ...project,
+      product,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
