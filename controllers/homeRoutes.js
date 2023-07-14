@@ -55,7 +55,36 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
-router.get('/category', async (req, res) => {});
+router.get('/categories', async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    const categoryData = await Category.findAll({
+      include: [
+        {
+          model: Product,
+          attributes: ['product_name'],
+        },
+      ],
+    });
+
+    console.log(categoryData);
+
+    // Serialize data so the template can read it
+    const categories = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
+
+    console.log(categories);
+
+    // Pass serialized data and session flag into template
+    res.render('category', {
+      categories,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 /*
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
