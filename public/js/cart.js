@@ -36,7 +36,7 @@ const addToBasket = async () => {
   });
 
   if (response.ok) {
-    console.log(`${stock} ${productName} are remained.`);
+    document.querySelector('#stock').textContent = stock;
   }
 
   return;
