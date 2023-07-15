@@ -1,17 +1,13 @@
 <div class="product-details">
-    <h2>{{product.product_name}}</h2>
-    <p>Price: £{{product.price}}</p>
-    <p>Stock: {{product.stock}}</p>
+    <h2 id="productName">{{product.product_name}}</h2>
+    <p>Price: £<span id="price">{{product.price}}</span></p>
+    <p>Stock: <span id="stock">{{product.stock}}</span></p>
     <p>Description:</p>
-    <p>Category ID: {{category_id}}</p>
+    <p>Product ID: <span id='productId'>{{product.id}}</span></p>
+    <div>
+        <label for="quantity">Quantity: </label>
+        <input id="quantity" type="number"/>
+    </div>    
     <button id="addToBasketButton" type="button">Add to Basket</button>
+    <p>Total value in the basket: £<span id="totalValue">0</span></p>   
 </div>
-<div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">
-        <div id="cart">
-        </div>
-        </div>
-<script src="/js/cart.js"></script>

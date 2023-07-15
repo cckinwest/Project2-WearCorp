@@ -1,3 +1,53 @@
+var basket = {
+  order: [],
+  totalValue: 0,
+};
+
+if (localStorage.getItem('shoppingCart')) {
+  basket = JSON.parse(localStorage.getItem('shoppingCart'));
+  document.querySelector('#totalValue').textContent = basket.totalValue;
+}
+
+const addToCart = async () => {
+  const productName = document.querySelector('#productName').textContent;
+  const unitPrice = parseFloat(document.querySelector('#price').textContent);
+  const productId = parseInt(document.querySelector('#productId').textContent);
+  var stock = parseInt(document.querySelector('#stock').textContent);
+  const quantity = document.querySelector('#quantity').value;
+
+  const cartItem = {
+    productName: productName,
+    unitPrice: unitPrice,
+    quantity: quantity,
+  };
+
+  basket.order.push(cartItem);
+  stock -= quantity;
+  basket.totalValue += unitPrice * quantity;
+
+  localStorage.setItem('shoppingCart', JSON.stringify(basket));
+
+  const response = await fetch(`/api/products/${productId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      product_name: productName,
+      stock: stock,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    document.querySelector('#stock').textContent = stock;
+    document.querySelector('#totalValue').textContent = basket.totalValue;
+  }
+
+  return;
+};
+
+document
+  .querySelector('#addToBasketButton')
+  .addEventListener('click', addToCart);
+/*
 const cartItems = [];
 const cartElement = document.getElementById('cart');
 
@@ -70,4 +120,4 @@ if (addToBasketButton) {
   });
 }
 
-displayCartItems();
+displayCartItems();*/

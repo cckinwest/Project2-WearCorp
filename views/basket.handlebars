@@ -1,14 +1,15 @@
 <!-- Loop over each object in the projects array -->
-
-<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      Your Basket
-      <a href="/product/{{product.id}}">{{product.product.name}}</a>
-    </h2>
-    <div id="basket_summary">
-    </div>
-
+<div>
+  {{#each basket.order as |cartItem| }}
+  <div style="background-color: #FF577F; margin: 2px">  
+      
+      <p>Product Name: {{cartItem.productName}}</p>
+      <p>Unit Price: £{{cartItem.unitPrice}}</p>
+      <p>Quantity: {{cartItem.quantity}}</p>
+    
   </div>
+  {{/each}}
+  <p>Total value: £{{basket.totalValue}}</p>
+  <button id="checkoutBtn">Checkout</button>
 </div>
+

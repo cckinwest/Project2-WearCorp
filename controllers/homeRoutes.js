@@ -55,9 +55,24 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
-router.get('/basket', async (req, res) => {
+router.get('/categories', async (req, res) => {
   try {
-    res.render('basket', {
+    // Get all projects and JOIN with user data
+    const categoryData = await Category.findAll({
+      include: [
+        {
+          model: Product,
+          attributes: ['product_name'],
+        },
+      ],
+    });
+    // Serialize data so the template can read it
+    const categories = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
+    // Pass serialized data and session flag into template
+    res.render('category', {
+      categories,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -65,7 +80,26 @@ router.get('/basket', async (req, res) => {
   }
 });
 
-router.get('/category', async (req, res) => {});
+router.get('/basket', async (req, res) => {
+  try {
+    var basketData = {
+      order: [],
+      totalValue: 0,
+    };
+
+    if (localStorage.getItem('shoppingCart')) {
+      basketData = JSON.parse(localStorage.getItem('shoppingCart'));
+    }
+
+    res.render('basket', {
+      basketData,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 /*
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
