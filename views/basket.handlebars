@@ -1,4 +1,3 @@
-<!-- Loop over each object in the projects array -->
 <div>
   {{#each orderItems as |orderItem| }}
   <div style="background-color: #FF577F; margin: 2px">  
@@ -6,10 +5,11 @@
       <p>Product Name: {{orderItem.product.product_name}}</p>
       <p>Unit Price: £{{orderItem.product.price}}</p>
       <p>Quantity: {{orderItem.quantity}}</p>
+      <p>Confirmed: {{orderItem.confirmed}}</p>
     
   </div>
   {{/each}}
   <p>Total value: £{{totalValue}}</p>
-  <button id="checkoutBtn">Checkout</button>
+  <button id="enterDetailBtn">Enter your details</button>
 </div>
 

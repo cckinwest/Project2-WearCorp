@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+  
     const productData = await Product.findAll({
       include: [
         {
@@ -14,10 +14,8 @@ router.get('/', withAuth, async (req, res) => {
       ],
     });
 
-    // Serialize data so the template can read it
     const products = productData.map((product) => product.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
     res.render('homepage', {
       products,
       logged_in: req.session.logged_in,
@@ -66,11 +64,11 @@ router.get('/categories', async (req, res) => {
         },
       ],
     });
-    // Serialize data so the template can read it
+    
     const categories = categoryData.map((category) =>
       category.get({ plain: true })
     );
-    // Pass serialized data and session flag into template
+    
     res.render('category', {
       categories,
       logged_in: req.session.logged_in,
@@ -91,6 +89,7 @@ router.get('/basket', async (req, res) => {
       ],
       where: {
         user_id: req.session.user_id,
+        confirmed: false,
       },
     });
 
