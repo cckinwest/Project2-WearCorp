@@ -17,9 +17,10 @@ OrderItem.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    unit_value: {
-      type: DataTypes.DECIMAL,
+    confirmed: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
     product_id: {
       type: DataTypes.INTEGER,
@@ -28,10 +29,10 @@ OrderItem.init(
         key: 'id',
       },
     },
-    order_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'order',
+        model: 'user',
         key: 'id',
       },
     },

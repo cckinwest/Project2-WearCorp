@@ -1,3 +1,4 @@
+/*
 var basket = {
   order: [],
   totalValue: 0,
@@ -6,7 +7,7 @@ var basket = {
 if (localStorage.getItem('shoppingCart')) {
   basket = JSON.parse(localStorage.getItem('shoppingCart'));
   document.querySelector('#totalValue').textContent = basket.totalValue;
-}
+}*/
 
 const addToCart = async () => {
   const productName = document.querySelector('#productName').textContent;
@@ -14,20 +15,42 @@ const addToCart = async () => {
   const productId = parseInt(document.querySelector('#productId').textContent);
   var stock = parseInt(document.querySelector('#stock').textContent);
   const quantity = document.querySelector('#quantity').value;
-
+  const userId = parseInt(document.querySelector('#userId').textContent);
+  /*
   const cartItem = {
     productName: productName,
     unitPrice: unitPrice,
     quantity: quantity,
   };
 
-  basket.order.push(cartItem);
+  basket.order.push(cartItem);*/
+
+  await fetch(`/api/orderItems`, {
+    method: 'POST',
+    body: JSON.stringify({
+      quantity: quantity,
+      confirmed: false,
+      product_id: productId,
+      user_id: userId,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const response = await fetch(`/api/users/${userId}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const userData = await response.json();
+
+  var totalValue = parseFloat(userData.totalValue);
+
   stock -= quantity;
-  basket.totalValue += unitPrice * quantity;
+  totalValue += unitPrice * quantity;
 
-  localStorage.setItem('shoppingCart', JSON.stringify(basket));
+  //localStorage.setItem('shoppingCart', JSON.stringify(basket));
 
-  const response = await fetch(`/api/products/${productId}`, {
+  await fetch(`/api/products/${productId}`, {
     method: 'PUT',
     body: JSON.stringify({
       product_name: productName,
@@ -36,10 +59,16 @@ const addToCart = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  if (response.ok) {
-    document.querySelector('#stock').textContent = stock;
-    document.querySelector('#totalValue').textContent = basket.totalValue;
-  }
+  await fetch(`/api/users/${userId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      totalValue: totalValue,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  document.querySelector('#stock').textContent = stock;
+  document.querySelector('#totalValue').textContent = totalValue;
 
   return;
 };

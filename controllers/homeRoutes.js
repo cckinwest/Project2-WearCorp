@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product, Category } = require('../models');
+const { Product, Category, User, OrderItem } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
@@ -39,15 +39,15 @@ router.get('/product/:id', async (req, res) => {
       ],
     });
 
-    if (!productData) {
-      res.status(404).json({ message: 'Product not found' });
-      return;
-    }
+    const userData = await User.findByPk(req.session.user_id);
 
     const product = productData.get({ plain: true });
+    const user = userData.get({ plain: true });
 
     res.render('product', {
       product,
+      user_id: req.session.user_id,
+      totalValue: user.totalValue,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -82,17 +82,27 @@ router.get('/categories', async (req, res) => {
 
 router.get('/basket', async (req, res) => {
   try {
-    var basketData = {
-      order: [],
-      totalValue: 0,
-    };
+    const orderItemsData = await OrderItem.findAll({
+      include: [
+        {
+          model: Product,
+          attributes: ['product_name', 'price'],
+        },
+      ],
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
 
-    if (localStorage.getItem('shoppingCart')) {
-      basketData = JSON.parse(localStorage.getItem('shoppingCart'));
-    }
+    const orderItems = orderItemsData.map((item) => item.get({ plain: true }));
+
+    const userData = await User.findByPk(req.session.user_id);
+
+    const user = userData.get({ plain: true });
 
     res.render('basket', {
-      basketData,
+      orderItems,
+      totalValue: user.totalValue,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

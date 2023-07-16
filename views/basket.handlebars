@@ -1,15 +1,15 @@
 <!-- Loop over each object in the projects array -->
 <div>
-  {{#each basket.order as |cartItem| }}
+  {{#each orderItems as |orderItem| }}
   <div style="background-color: #FF577F; margin: 2px">  
       
-      <p>Product Name: {{cartItem.productName}}</p>
-      <p>Unit Price: £{{cartItem.unitPrice}}</p>
-      <p>Quantity: {{cartItem.quantity}}</p>
+      <p>Product Name: {{orderItem.product.product_name}}</p>
+      <p>Unit Price: £{{orderItem.product.price}}</p>
+      <p>Quantity: {{orderItem.quantity}}</p>
     
   </div>
   {{/each}}
-  <p>Total value: £{{basket.totalValue}}</p>
+  <p>Total value: £{{totalValue}}</p>
   <button id="checkoutBtn">Checkout</button>
 </div>
 

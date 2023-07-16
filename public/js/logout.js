@@ -6,7 +6,7 @@ const logout = async () => {
 
   if (response.ok) {
     document.location.replace('/');
-    localStorage.removeItem('shoppingCart');
+    req.session.destroy();
   } else {
     alert(response.statusText);
   }
