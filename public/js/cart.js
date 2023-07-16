@@ -1,14 +1,3 @@
-/*
-var basket = {
-  order: [],
-  totalValue: 0,
-};
-
-if (localStorage.getItem('shoppingCart')) {
-  basket = JSON.parse(localStorage.getItem('shoppingCart'));
-  document.querySelector('#totalValue').textContent = basket.totalValue;
-}*/
-
 const addToCart = async () => {
   const productName = document.querySelector('#productName').textContent;
   const unitPrice = parseFloat(document.querySelector('#price').textContent);
@@ -16,14 +5,6 @@ const addToCart = async () => {
   var stock = parseInt(document.querySelector('#stock').textContent);
   const quantity = document.querySelector('#quantity').value;
   const userId = parseInt(document.querySelector('#userId').textContent);
-  /*
-  const cartItem = {
-    productName: productName,
-    unitPrice: unitPrice,
-    quantity: quantity,
-  };
-
-  basket.order.push(cartItem);*/
 
   await fetch(`/api/orderItems`, {
     method: 'POST',
@@ -48,8 +29,6 @@ const addToCart = async () => {
   stock -= quantity;
   totalValue += unitPrice * quantity;
 
-  //localStorage.setItem('shoppingCart', JSON.stringify(basket));
-
   await fetch(`/api/products/${productId}`, {
     method: 'PUT',
     body: JSON.stringify({
@@ -73,6 +52,14 @@ const addToCart = async () => {
   return;
 };
 
+const goToDetails = () => {
+  document.location.replace('/details');
+};
+
 document
   .querySelector('#addToBasketButton')
   .addEventListener('click', addToCart);
+
+document
+  .querySelector('#enterDetailsBtn')
+  .addEventListener('click', goToDetails);
