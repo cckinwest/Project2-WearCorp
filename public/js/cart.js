@@ -52,14 +52,6 @@ const addToCart = async () => {
   return;
 };
 
-const goToDetails = () => {
-  document.location.replace('/details');
-};
-
 document
   .querySelector('#addToBasketButton')
   .addEventListener('click', addToCart);
-
-document
-  .querySelector('#enterDetailsBtn')
-  .addEventListener('click', goToDetails);
