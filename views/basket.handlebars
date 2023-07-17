@@ -1,0 +1,21 @@
+<div>
+  {{#each orderItems as |orderItem| }}
+  <div style="background-color: #FF577F; margin: 2px">  
+      
+      <p>Product Name: {{orderItem.product.product_name}}</p>
+      <p>Unit Price: £{{orderItem.product.price}}</p>
+      <p>Quantity: {{orderItem.quantity}}</p>
+      <p>Confirmed: {{orderItem.confirmed}}</p>
+    
+  </div>
+  {{/each}}
+  <p>Total value: £{{totalValue}}</p>
+  <button id="enterDetailsBtn" onClick="goToEnterDetails()">Enter your details</button>
+</div>
+
+<script>
+  function goToEnterDetails() {
+    location.replace('/details')
+  }
+</script>
+

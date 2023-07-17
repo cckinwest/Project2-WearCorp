@@ -1,10 +1,9 @@
 const router = require('express').Router();
-const { Product, Category } = require('../models');
+const { Product, Category, User, OrderItem } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
     const productData = await Product.findAll({
       include: [
         {
@@ -14,10 +13,8 @@ router.get('/', withAuth, async (req, res) => {
       ],
     });
 
-    // Serialize data so the template can read it
     const products = productData.map((product) => product.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
     res.render('homepage', {
       products,
       logged_in: req.session.logged_in,
@@ -39,15 +36,15 @@ router.get('/product/:id', async (req, res) => {
       ],
     });
 
-    if (!productData) {
-      res.status(404).json({ message: 'Product not found' });
-      return;
-    }
+    const userData = await User.findByPk(req.session.user_id);
 
     const product = productData.get({ plain: true });
+    const user = userData.get({ plain: true });
 
     res.render('product', {
       product,
+      user_id: req.session.user_id,
+      totalValue: user.totalValue,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -67,16 +64,10 @@ router.get('/categories', async (req, res) => {
       ],
     });
 
-    console.log(categoryData);
-
-    // Serialize data so the template can read it
     const categories = categoryData.map((category) =>
       category.get({ plain: true })
     );
 
-    console.log(categories);
-
-    // Pass serialized data and session flag into template
     res.render('category', {
       categories,
       logged_in: req.session.logged_in,
@@ -85,26 +76,41 @@ router.get('/categories', async (req, res) => {
     res.status(500).json(err);
   }
 });
-/*
-// Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+
+router.get('/basket', async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+    const orderItemsData = await OrderItem.findAll({
+      include: [
+        {
+          model: Product,
+          attributes: ['product_name', 'price'],
+        },
+      ],
+      where: {
+        user_id: req.session.user_id,
+        confirmed: false,
+      },
     });
+
+    const orderItems = orderItemsData.map((item) => item.get({ plain: true }));
+
+    const userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({ plain: true });
 
-    res.render('profile', {
-      ...user,
-      logged_in: true,
+    res.render('basket', {
+      orderItems,
+      totalValue: user.totalValue,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-});*/
+});
+
+router.get('/details', (req, res) => {
+  res.render('details');
+});
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route

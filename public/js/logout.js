@@ -6,10 +6,7 @@ const logout = async () => {
 
   if (response.ok) {
     document.location.replace('/');
-
-    if (localStorage.getItem('shoppingCart')) {
-      localStorage.removeItem('shoppingCart');
-    }
+    req.session.destroy();
   } else {
     alert(response.statusText);
   }

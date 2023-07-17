@@ -1,14 +1,5 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-/*
-router.get('/', async (req, res) => {
-  try {
-    const userData = await User.findAll();
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});*/
 
 router.post('/', async (req, res) => {
   try {
@@ -20,6 +11,42 @@ router.post('/', async (req, res) => {
 
       res.status(200).json(userData);
     });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id);
+
+    if (!userData) {
+      res.status(400).json({ message: 'No user is found.' });
+      return;
+    }
+
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const userData = await User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Errors happen and the user is not updated.' });
+      return;
+    }
+
+    res.status(200).json({ message: 'The user is updated successfully.' });
   } catch (err) {
     res.status(400).json(err);
   }
