@@ -77,6 +77,36 @@ router.get('/categories', async (req, res) => {
   }
 });
 
+router.get('/categories/:id', async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const categoryData = await Product.findAll({
+  
+        // include: [Category],
+        where: {
+          category_id: categoryId,
+        },
+      })
+
+      const products = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
+
+    res.render('categoryList', {
+      products,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+
+
+
 router.get('/basket', async (req, res) => {
   try {
     const orderItemsData = await OrderItem.findAll({
