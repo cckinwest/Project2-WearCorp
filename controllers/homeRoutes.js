@@ -88,11 +88,14 @@ router.get('/categories/:id', async (req, res) => {
         },
       })
 
+      const categoryName = categoryData.category_name;
+
       const products = categoryData.map((category) =>
       category.get({ plain: true })
     );
 
     res.render('categoryList', {
+      categoryName,
       products,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
