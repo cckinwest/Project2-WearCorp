@@ -1,0 +1,21 @@
+<!-- categoryList.handlebars -->
+
+<!-- categoryList.handlebars -->
+
+<h1>{{ categoryName }}</h1>
+
+<ul>
+  {{#each products}}
+    <li>
+      <a href="/product/{{ id }}">{{ product_name }}</a>
+      <p> £{{price}}</p>
+      
+    </li>
+  {{/each}}
+</ul>
+
+
+
+
+
+

@@ -5,12 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WearCorp E-shop</title>  
+  <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
   <div>
     <header>
-      <nav style="background-color: #F79327">        
+      <nav style="background-color: #1693e7">        
         {{#if logged_in}}
         <button id="logout">Logout</button>
         {{else}}
@@ -21,7 +23,7 @@
         <a href="/basket">Basket</a>
       </nav>
     </header>
-    <main style="background-color: #FFE569">
+    <main style="background-color: #ffffff">
       <!-- Render the sub layout -->
       {{{ body }}}
     </main>    

@@ -150,7 +150,7 @@ router.get('/product/:id', withAuth, async (req, res) => {
 
     const product = productData.get({ plain: true });
     const user = userData.get({ plain: true });
-
+    console.log(product);
     res.render('product', {
       product,
       user_id: req.session.user_id,
@@ -187,7 +187,42 @@ router.get('/categories', withAuth, async (req, res) => {
   }
 });
 
-router.get('/basket', withAuth, async (req, res) => {
+
+router.get('/categories/:id', async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const categoryData = await Product.findAll({
+  
+        // include: [Category],
+        where: {
+          category_id: categoryId,
+        },
+      })
+
+      const categoryName = categoryData.category_name;
+
+      const products = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
+
+    res.render('categoryList', {
+      categoryName,
+      products,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+
+
+
+router.get('/basket', async (req, res) => {
+
   try {
     const orderItemsData = await OrderItem.findAll({
       include: [
