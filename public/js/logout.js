@@ -6,7 +6,6 @@ const logout = async () => {
 
   if (response.ok) {
     document.location.replace('/');
-    req.session.destroy();
   } else {
     alert(response.statusText);
   }
