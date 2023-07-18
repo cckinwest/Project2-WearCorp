@@ -1,0 +1,18 @@
+<div>
+    <p>Hi, {{username}},</p>
+    <p>Thank you! The following order is processed:</p>
+    {{#each items as |item|}}
+    <div style="background-color: #FF577F; margin: 2px">
+        
+        <p>Product Name: {{item.product.product_name}}</p>
+        <p>Price: £{{item.product.price}}</p>
+        <p>Quantity: {{item.quantity}}</p>
+  
+    </div>
+    {{/each}}
+    <div style="margin: 2px">
+        <p>An email will be sent to the following address soon for confirmation:</p>
+        <p>{{email}}</p>
+    </div>
+    <button id="addressBtn">Enter your address for delivery</button>    
+</div>

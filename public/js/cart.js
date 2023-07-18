@@ -26,9 +26,9 @@ const addToCart = async () => {
 
   var totalValue = parseFloat(userData.totalValue);
 
-  stock -= quantity;
+  //stock -= quantity;
   totalValue += unitPrice * quantity;
-
+  /*
   await fetch(`/api/products/${productId}`, {
     method: 'PUT',
     body: JSON.stringify({
@@ -36,7 +36,7 @@ const addToCart = async () => {
       stock: stock,
     }),
     headers: { 'Content-Type': 'application/json' },
-  });
+  });*/
 
   await fetch(`/api/users/${userId}`, {
     method: 'PUT',
@@ -46,7 +46,7 @@ const addToCart = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  document.querySelector('#stock').textContent = stock;
+  //document.querySelector('#stock').textContent = stock;
   document.querySelector('#totalValue').textContent = totalValue;
 
   return;
