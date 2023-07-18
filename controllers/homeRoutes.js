@@ -52,7 +52,7 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
-router.get('/categories', async (req, res) => {
+router.get('/categories', withAuth, async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const categoryData = await Category.findAll({
