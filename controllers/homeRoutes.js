@@ -2,6 +2,58 @@ const router = require('express').Router();
 const { Product, Category, User, OrderItem } = require('../models');
 const withAuth = require('../utils/auth');
 
+const stripe = require('stripe')(process.env.STRIPE_API_SECRET_KEY);
+
+router.post('/create-checkout-session', async (req, res, next) => {
+  try {
+    //console.log('I am now in the route of /create-checkout-session');
+    //console.log(req.body);
+
+    const lineItems = req.body.map((item) => {
+      return {
+        price_data: {
+          currency: 'GBP',
+          product_data: {
+            name: item.product.product_name,
+          },
+          unit_amount_decimal: item.product.price * 100,
+        },
+        quantity: item.quantity,
+      };
+    });
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'payment',
+      line_items: lineItems,
+      success_url: 'https://www.google.com',
+      //cancel_url: '/order/cancel',
+    });
+
+    console.log(session);
+
+    res.json({ url: session.url });
+    /*
+    const userData = await User.findByPk(req.params.userId, {
+      attributes: ['totalValue'],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.send({ clientSecret: paymentIntent.client_secret });*/
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/order/success', async (req, res) => {
+  res.send(`<html><body><h1>Thanks for your order!</h1></body></html>`);
+});
+
+router.get('/order/cancel', async (req, res) => {
+  res.send(`<html><body><h1>Sorry, your order fails!</h1></body></html>`);
+});
+
 router.get('/', withAuth, async (req, res) => {
   try {
     const productData = await Product.findAll({
@@ -24,7 +76,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/product/:id', async (req, res) => {
+router.get('/product/:id', withAuth, async (req, res) => {
   try {
     const productId = req.params.id;
     const productData = await Product.findByPk(productId, {
@@ -52,7 +104,7 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
-router.get('/categories', async (req, res) => {
+router.get('/categories', withAuth, async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const categoryData = await Category.findAll({
@@ -77,7 +129,7 @@ router.get('/categories', async (req, res) => {
   }
 });
 
-router.get('/basket', async (req, res) => {
+router.get('/basket', withAuth, async (req, res) => {
   try {
     const orderItemsData = await OrderItem.findAll({
       include: [
@@ -100,6 +152,7 @@ router.get('/basket', async (req, res) => {
 
     res.render('basket', {
       orderItems,
+      user_id: req.session.user_id,
       totalValue: user.totalValue,
       logged_in: req.session.logged_in,
     });

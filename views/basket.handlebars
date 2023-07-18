@@ -10,12 +10,34 @@
   </div>
   {{/each}}
   <p>Total value: £{{totalValue}}</p>
-  <button id="enterDetailsBtn" onClick="goToEnterDetails()">Enter your details</button>
+  <button id="enterDetailsBtn" onClick="checkoutFunc({{user_id}})">Checkout</button>
 </div>
 
-<script>
-  function goToEnterDetails() {
-    location.replace('/details')
+<script> 
+
+  async function checkoutFunc(id) {
+
+    try {
+
+      const response_order = await fetch(`/api/orderItems/users/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const orderItem = await response_order.json();
+
+      const response = await fetch('/create-checkout-session', {
+        method: 'POST',
+        body: JSON.stringify(orderItem),
+        headers: { 'Content-Type': 'application/json' },
+      })
+
+      const { url } = await response.json();
+      window.location = url;
+    } catch (error) {
+      console.error(error)
+    }
+    
   }
 </script>
 
