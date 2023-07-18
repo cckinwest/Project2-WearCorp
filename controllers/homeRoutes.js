@@ -26,28 +26,86 @@ router.post('/create-checkout-session', async (req, res, next) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: lineItems,
-      success_url: 'https://www.google.com',
-      //cancel_url: '/order/cancel',
+      success_url: `${process.env.ROOT_URL}/order/success/${req.session.user_id}`,
+      cancel_url: `${process.env.ROOT_URL}/order/cancel`,
     });
-
-    console.log(session);
 
     res.json({ url: session.url });
-    /*
-    const userData = await User.findByPk(req.params.userId, {
-      attributes: ['totalValue'],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.send({ clientSecret: paymentIntent.client_secret });*/
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/order/success', async (req, res) => {
-  res.send(`<html><body><h1>Thanks for your order!</h1></body></html>`);
+router.get('/order/success/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id);
+
+    const userinfo = userData.get({ plain: true });
+
+    const orderItems = await OrderItem.findAll({
+      include: [
+        {
+          model: Product,
+          attributes: ['product_name', 'price'],
+        },
+      ],
+      where: {
+        user_id: req.params.id,
+      },
+    });
+
+    console.log(orderItems);
+
+    const items = orderItems.map((item) => item.get({ plain: true }));
+
+    console.log(items);
+
+    items.forEach(async (item) => {
+      const productData = await Product.findByPk(item.product_id);
+
+      const data = productData.get({ plain: true });
+
+      var newStock = data.stock - item.quantity;
+
+      await Product.update(
+        { stock: newStock },
+        {
+          where: {
+            id: item.product_id,
+          },
+        }
+      );
+    });
+
+    await OrderItem.update(
+      { confirmed: true },
+      {
+        where: {
+          user_id: req.params.id,
+        },
+      }
+    );
+
+    await User.update(
+      {
+        totalValue: 0,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    res.render('success', {
+      items,
+      username: userinfo.username,
+      email: userinfo.email,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.get('/order/cancel', async (req, res) => {
