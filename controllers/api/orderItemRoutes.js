@@ -41,6 +41,7 @@ router.get('/users/:id', async (req, res) => {
       include: [{ model: Product, attributes: ['product_name', 'price'] }],
       where: {
         user_id: req.params.id,
+        confirmed: false,
       },
     });
     if (!itemData) {

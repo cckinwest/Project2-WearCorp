@@ -4,11 +4,8 @@ const withAuth = require('../utils/auth');
 
 const stripe = require('stripe')(process.env.STRIPE_API_SECRET_KEY);
 
-router.post('/create-checkout-session', async (req, res, next) => {
+router.post('/create-checkout-session', async (req, res) => {
   try {
-    //console.log('I am now in the route of /create-checkout-session');
-    //console.log(req.body);
-
     const lineItems = req.body.map((item) => {
       return {
         price_data: {
@@ -27,7 +24,7 @@ router.post('/create-checkout-session', async (req, res, next) => {
       mode: 'payment',
       line_items: lineItems,
       success_url: `${process.env.ROOT_URL}/order/success/${req.session.user_id}`,
-      cancel_url: `${process.env.ROOT_URL}/order/cancel`,
+      cancel_url: `${process.env.ROOT_URL}/order/cancel/${req.session.user_id}`,
     });
 
     res.json({ url: session.url });
@@ -51,14 +48,11 @@ router.get('/order/success/:id', async (req, res) => {
       ],
       where: {
         user_id: req.params.id,
+        confirmed: false,
       },
     });
 
-    console.log(orderItems);
-
     const items = orderItems.map((item) => item.get({ plain: true }));
-
-    console.log(items);
 
     items.forEach(async (item) => {
       const productData = await Product.findByPk(item.product_id);
@@ -97,19 +91,39 @@ router.get('/order/success/:id', async (req, res) => {
       }
     );
 
+    req.session.save(() => {
+      req.session.logged_in = true;
+      req.session.user_id = req.params.id;
+    });
+
     res.render('success', {
       items,
       username: userinfo.username,
       email: userinfo.email,
-      logged_in: true,
+      address: userinfo.address,
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/order/cancel', async (req, res) => {
-  res.send(`<html><body><h1>Sorry, your order fails!</h1></body></html>`);
+router.get('/order/cancel/:id', async (req, res) => {
+  const userData = await User.findByPk(req.params.id);
+
+  const userinfo = userData.get({ plain: true });
+
+  req.session.save(() => {
+    req.session.logged_in = true;
+    req.session.user_id = req.params.id;
+  });
+
+  res.render('cancel', {
+    username: userinfo.username,
+    logged_in: req.session.logged_in,
+    user_id: req.session.user_id,
+  });
 });
 
 router.get('/', withAuth, async (req, res) => {
@@ -187,21 +201,19 @@ router.get('/categories', withAuth, async (req, res) => {
   }
 });
 
-
-router.get('/categories/:id', async (req, res) => {
+router.get('/categories/:id', withAuth, async (req, res) => {
   try {
     const categoryId = req.params.id;
     const categoryData = await Product.findAll({
-  
-        // include: [Category],
-        where: {
-          category_id: categoryId,
-        },
-      })
+      // include: [Category],
+      where: {
+        category_id: categoryId,
+      },
+    });
 
-      const categoryName = categoryData.category_name;
+    const categoryName = categoryData.category_name;
 
-      const products = categoryData.map((category) =>
+    const products = categoryData.map((category) =>
       category.get({ plain: true })
     );
 
@@ -216,13 +228,7 @@ router.get('/categories/:id', async (req, res) => {
   }
 });
 
-
-
-
-
-
-router.get('/basket', async (req, res) => {
-
+router.get('/basket', withAuth, async (req, res) => {
   try {
     const orderItemsData = await OrderItem.findAll({
       include: [

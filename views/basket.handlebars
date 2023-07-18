@@ -10,6 +10,12 @@
   </div>
   {{/each}}
   <p>Total value: £{{totalValue}}</p>
+
+  <div class="form-group">
+    <label for="addressText">Address for delivery: </label>
+    <input type="text" id="addressText"/>
+  </div>
+
   <button id="enterDetailsBtn" onClick="checkoutFunc({{user_id}})">Checkout</button>
 </div>
 
@@ -17,7 +23,17 @@
 
   async function checkoutFunc(id) {
 
+    const address = document.querySelector('#addressText').value;
+
     try {
+
+      await fetch(`/api/users/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          address: address,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      });
 
       const response_order = await fetch(`/api/orderItems/users/${id}`, {
         method: 'GET',

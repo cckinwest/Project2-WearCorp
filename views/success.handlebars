@@ -1,6 +1,6 @@
 <div>
-    <p>Hi, {{username}},</p>
-    <p>Thank you! The following order is processed:</p>
+    <p>Hi, {{username}}, your order is successfully processed.</p>
+    <p>The details are as follows:</p>
     {{#each items as |item|}}
     <div style="background-color: #FF577F; margin: 2px">
         
@@ -11,8 +11,8 @@
     </div>
     {{/each}}
     <div style="margin: 2px">
-        <p>An email will be sent to the following address soon for confirmation:</p>
-        <p>{{email}}</p>
-    </div>
-    <button id="addressBtn">Enter your address for delivery</button>    
+        <p>The items will be delivered to the following address:</p>
+        <p>{{address}}</p>
+        <p>An email will be sent to {{email}} for confirmation.</p>
+    </div>    
 </div>
