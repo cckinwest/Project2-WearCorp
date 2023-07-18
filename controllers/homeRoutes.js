@@ -40,7 +40,7 @@ router.get('/product/:id', async (req, res) => {
 
     const product = productData.get({ plain: true });
     const user = userData.get({ plain: true });
-
+    console.log(product);
     res.render('product', {
       product,
       user_id: req.session.user_id,

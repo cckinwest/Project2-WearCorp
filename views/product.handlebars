@@ -1,14 +1,20 @@
 <div class="product-details">
+  <div class="product-image">
+    <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
+  </div>
+  <div class="product-info">
     <h2 id="productName">{{product.product_name}}</h2>
-    <p>Price: £<span id="price">{{product.price}}</span></p>
-    <p>Stock: <span id="stock">{{product.stock}}</span></p>
-    <p>Description:</p>
-    <p>Product ID: <span id='productId'>{{product.id}}</span></p>
-    <p>User ID: <span id='userId'>{{user_id}}</span></p>
-    <div>
-        <label for="quantity">Quantity: </label>
-        <input id="quantity" type="number"/>
+    <p class="price">Price: £<span id="price">{{product.price}}</span></p>
+    <p class="stock">Stock: <span id="stock">{{product.stock}}</span></p>
+    <p class="product-id">Product ID: <span id='productId'>{{product.id}}</span></p>
+    <p class="user-id">User ID: <span id='userId'>{{user_id}}</span></p>
+    <p class="description">Description:</p>
+    <p>{{product.description}}</p>
+    <div class="quantity">
+      <label for="quantity">Quantity: </label>
+      <input id="quantity" type="number"/>
     </div>    
     <button id="addToBasketButton" type="button">Add to Basket</button>
-    <p>Total value in the basket: £<span id="totalValue">{{totalValue}}</span></p>   
+    <p class="total-value">Total value in the basket: £<span id="totalValue">{{totalValue}}</span></p>
+  </div>
 </div>
