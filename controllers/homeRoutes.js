@@ -52,7 +52,7 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
-router.get('/categories', async (req, res) => {
+router.get('/categories', withAuth, async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const categoryData = await Category.findAll({
@@ -88,11 +88,14 @@ router.get('/categories/:id', async (req, res) => {
         },
       })
 
+      const categoryName = categoryData.category_name;
+
       const products = categoryData.map((category) =>
       category.get({ plain: true })
     );
 
     res.render('categoryList', {
+      categoryName,
       products,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
