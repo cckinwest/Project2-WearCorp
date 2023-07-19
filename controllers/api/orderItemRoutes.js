@@ -22,8 +22,8 @@ router.get('/:id', async (req, res) => {
   try {
     const itemData = await OrderItem.findByPk(req.params.id, {
       include: [
-        { model: User, attributes: ['email'] },
-        { model: Product, attributes: ['price'] },
+        { model: User },
+        { model: Product },
       ],
     });
     if (!itemData) {

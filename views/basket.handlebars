@@ -1,15 +1,14 @@
 <div>
   {{#each orderItems as |orderItem| }}
-  <div style="background-color: #FF577F; margin: 2px">  
-      
-      <p>Product Name: {{orderItem.product.product_name}}</p>
-      <p>Unit Price: £{{orderItem.product.price}}</p>
-      <p>Quantity: {{orderItem.quantity}}</p>
-      <p>Confirmed: {{orderItem.confirmed}}</p>
-    
+  <div style="background-color: #FF577F; margin: 2px;" id='order{{orderItem.id}}'>  
+    <p>Product Name: {{orderItem.product.product_name}}</p>
+    <p>Unit Price: £{{orderItem.product.price}}</p>
+    <p>Quantity: {{orderItem.quantity}}</p>
+    <p>Confirmed: {{orderItem.confirmed}}</p>
+    <button id='delete{{orderItem.id}}' onClick="handleDelete({{orderItem.id}})">Delete</button>
   </div>
   {{/each}}
-  <p>Total value: £{{totalValue}}</p>
+  <p id="totalText">Total value: £{{totalValue}}</p>
 
   <div class="form-group">
     <label for="addressText">Address for delivery: </label>
@@ -55,5 +54,52 @@
     }
     
   }
+
+  async function handleDelete(id) {
+
+    const response_order = await fetch(`/api/orderItems/${id}`, {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    });
+
+    const item = await response_order.json();
+
+    console.log(item);
+
+    const price = item.product.price;
+
+    const quantity = item.quantity;
+
+    const response_user = await fetch(`/api/users/${item.user_id}`, {  
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    })
+
+    const userInfo = await response_user.json();
+
+    console.log(userInfo);
+
+    const totalValue = userInfo.totalValue;    
+    console.log(totalValue);
+    const newTotal = totalValue - price * quantity;
+    console.log(newTotal);
+
+    await fetch(`/api/users/${item.user_id}`, {  
+      method: 'PUT',
+      body: JSON.stringify({
+        totalValue: newTotal,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    })
+    
+    await fetch(`/api/orderItems/${id}`, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+    })
+    
+    document.querySelector(`#order${id}`).style.display = 'none';
+    document.querySelector(`#totalText`).textContent = `Total value: £${totalValue - price * quantity}`
+  }
+
 </script>
 
