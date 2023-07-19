@@ -124,3 +124,33 @@ nav a:not(:last-child) {
 #addToBasketButton:hover {
   background-color: #0d6aad;
 }
+
+.logo-image {
+  width: 95px;
+}
+
+/* Add a box around each product and set the width to create 4 products per row */
+.product-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px; /* Add some margin between the boxes */
+  width: calc(
+    25% - 40px
+  ); /* Calculate 25% width with 40px margin for each product */
+  text-align: center;
+  box-sizing: border-box; /* Make sure the padding and border are included in the width */
+  display: inline-block; /* Display the product boxes inline */
+  vertical-align: top; /* Align the product boxes at the top */
+}
+
+/* Adjust the product image styling inside the box */
+.product-box .homepage-image {
+  text-align: center;
+}
+
+.product-box img {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

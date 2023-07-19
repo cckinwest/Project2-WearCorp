@@ -11,18 +11,23 @@
 
 <body>
   <div>
-    <header>
-      <nav style="background-color: #1693e7">        
-        {{#if logged_in}}
-        <button id="logout">Logout</button>
-        {{else}}
-        <a href="/login">Login</a>
-        {{/if}}
-        <a href="/">Home</a>
-        <a href="/categories">Category</a>
-        <a href="/basket">Basket</a>
-      </nav>
-    </header>
+    <header style="display: flex; align-items: center; background-color: #1693e7;">
+  <!-- Add the logo image with a class -->
+  <img src="/product-images/wearco-logo.png" alt="WearCorp Logo" class="logo-image" style="margin-right: 10px;" />
+
+  <!-- Navigation links -->
+  <nav style="display: flex; flex-grow: 1;">
+    {{#if logged_in}}
+    <button id="logout">Logout</button>
+    {{else}}
+    <a href="/login">Login</a>
+    {{/if}}
+    <a href="/">Home</a>
+    <a href="/categories">Category</a>
+    <a href="/basket">Basket</a>
+  </nav>
+</header>
+
     <main style="background-color: #ffffff">
       <!-- Render the sub layout -->
       {{{ body }}}
