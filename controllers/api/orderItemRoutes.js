@@ -35,6 +35,24 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.get('/users/:id', async (req, res) => {
+  try {
+    const itemData = await OrderItem.findAll({
+      include: [{ model: Product, attributes: ['product_name', 'price'] }],
+      where: {
+        user_id: req.params.id,
+        confirmed: false,
+      },
+    });
+    if (!itemData) {
+      res.status(200).json('No order data is found!');
+    }
+    res.status(200).json(itemData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.post('/', async (req, res) => {
   try {
     const itemData = await OrderItem.create(req.body);

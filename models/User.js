@@ -40,6 +40,11 @@ User.init(
       allowNull: false,
       defaultValue: 0,
     },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: '',
+    },
   },
   {
     hooks: {

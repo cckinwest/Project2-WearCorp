@@ -6,15 +6,56 @@
     <h2 id="productName">{{product.product_name}}</h2>
     <p class="price">Price: £<span id="price">{{product.price}}</span></p>
     <p class="stock">Stock: <span id="stock">{{product.stock}}</span></p>
-    <p class="product-id">Product ID: <span id='productId'>{{product.id}}</span></p>
-    <p class="user-id">User ID: <span id='userId'>{{user_id}}</span></p>
     <p class="description">Description:</p>
     <p>{{product.description}}</p>
     <div class="quantity">
       <label for="quantity">Quantity: </label>
       <input id="quantity" type="number"/>
     </div>    
-    <button id="addToBasketButton" type="button">Add to Basket</button>
+    <button id="addToBasketButton" type="button" onClick="addToCart({{product.id}}, {{user_id}})">Add to Basket</button>
     <p class="total-value">Total value in the basket: £<span id="totalValue">{{totalValue}}</span></p>
   </div>
 </div>
+
+<script>
+  async function addToCart (productId, userId) {
+    const productName = document.querySelector('#productName').textContent;
+    const unitPrice = parseFloat(document.querySelector('#price').textContent);
+    const quantity = document.querySelector('#quantity').value;
+
+    await fetch(`/api/orderItems`, {
+      method: 'POST',
+      body: JSON.stringify({
+        quantity: quantity,
+        confirmed: false,
+        product_id: productId,
+        user_id: userId,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const response = await fetch(`/api/users/${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const userData = await response.json();
+
+    var totalValue = parseFloat(userData.totalValue);
+
+    totalValue += unitPrice * quantity;
+
+    await fetch(`/api/users/${userId}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        totalValue: totalValue,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    document.querySelector('#totalValue').textContent = totalValue;
+
+    return;
+  };
+
+</script>
