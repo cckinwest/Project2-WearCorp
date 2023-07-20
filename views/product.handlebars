@@ -4,17 +4,33 @@
   </div>
   <div class="product-info">
     <h2 id="productName">{{product.product_name}}</h2>
-    <p class="price">Price: £<span id="price">{{product.price}}</span></p>
-    <p class="stock">Stock: <span id="stock">{{product.stock}}</span></p>
-    <p class="description">Description:</p>
-    <p>{{product.description}}</p>
+    
+    <!-- Price displayed in a box-like container -->
+    <div class="info-box">
+      <p class="price">Price: £<span id="price">{{product.price}}</span></p>
+    </div>
+
+    <!-- Stock displayed in a box-like container -->
+    <div class="info-box">
+      <p class="stock">Stock: <span id="stock">{{product.stock}}</span></p>
+    </div>
+
+    <!-- Description displayed in a box-like container -->
+    <div class="info-box description">
+      <p>{{product.description}}</p>
+    </div>
+
+    <!-- Action box for quantity and button -->
+    <div class="action-box">
     <div class="quantity">
       <label for="quantity">Quantity: </label>
       <input id="quantity" type="number"/>
-    </div>    
+    </div>
     <button id="addToBasketButton" type="button" onClick="addToCart({{product.id}}, {{user_id}})">Add to Basket</button>
-    <p class="total-value">Total value in the basket: £<span id="totalValue">{{totalValue}}</span></p>
   </div>
+
+  <p class="total-value">Total value in the basket: £<span id="totalValue">{{totalValue}}</span></p>
+</div>
 </div>
 
 <script>

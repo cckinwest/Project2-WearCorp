@@ -1,14 +1,19 @@
-<div>
+<div class="basket-container">
   {{#each orderItems as |orderItem| }}
-  <div style="background-color: #75C2F6; margin: 2px;" id='order{{orderItem.id}}'>  
-    <p>Product Name: {{orderItem.product.product_name}}</p>
-    <p>Unit Price: £{{orderItem.product.price}}</p>
-    <p>Quantity: {{orderItem.quantity}}</p>
-    <p>Confirmed: {{orderItem.confirmed}}</p>
-    <button id='delete{{orderItem.id}}' onClick="handleDelete({{orderItem.id}})">Delete</button>
+
+  <div class="order-item">  
+    <img src="/product-images/{{orderItem.product.imgurl}}" alt="{{orderItem.product.product_name}}">
+    <div>
+      <p>Product Name: {{orderItem.product.product_name}}</p>
+      <p>Unit Price: £{{orderItem.product.price}}</p>
+      <p>Quantity: {{orderItem.quantity}}</p>
+      <p>Confirmed: {{orderItem.confirmed}}</p>
+      <button id='delete{{orderItem.id}}' onClick="handleDelete({{orderItem.id}})">Delete</button>
+    </div>
   </div>
   {{/each}}
-  <p id="totalText">Total value: £{{totalValue}}</p>
+
+  <p class="total-value">Total value: £{{totalValue}}</p>
 
   <div class="form-group">
     <label for="addressText">Address for delivery: </label>
