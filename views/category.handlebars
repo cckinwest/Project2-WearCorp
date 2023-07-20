@@ -1,9 +1,10 @@
 {{#each categories as |category| }}
-<div style="background-color: #FF577F; margin: 2px">
+<div class="category">
   
     
     <h2>      
       <a href="/categories/{{category.id}}">{{category.category_name}}</a>
+      <img src="/category-images/{{category.imgurl}}" alt="{{category.category_name}}">
     </h2>
   
 </div>
