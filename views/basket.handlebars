@@ -1,6 +1,6 @@
 <div>
   {{#each orderItems as |orderItem| }}
-  <div style="background-color: #FF577F; margin: 2px;" id='order{{orderItem.id}}'>  
+  <div style="background-color: #75C2F6; margin: 2px;" id='order{{orderItem.id}}'>  
     <p>Product Name: {{orderItem.product.product_name}}</p>
     <p>Unit Price: £{{orderItem.product.price}}</p>
     <p>Quantity: {{orderItem.quantity}}</p>
@@ -39,16 +39,24 @@
         headers: { 'Content-Type': 'application/json' }
       });
 
-      const orderItem = await response_order.json();
+      const orderItems = await response_order.json();
 
-      const response = await fetch('/create-checkout-session', {
-        method: 'POST',
-        body: JSON.stringify(orderItem),
-        headers: { 'Content-Type': 'application/json' },
-      })
+      const stockStatus = checkStock(orderItems);
 
-      const { url } = await response.json();
-      window.location = url;
+      if (stockStatus.stockIsEnough) {
+        const response = await fetch('/create-checkout-session', {
+          method: 'POST',
+          body: JSON.stringify(orderItems),
+          headers: { 'Content-Type': 'application/json' },
+        })
+
+        const { url } = await response.json();
+        window.location = url;
+      } else {
+        alert(stockStatus.message);
+      }
+
+      
     } catch (error) {
       console.error(error)
     }
@@ -99,6 +107,27 @@
     
     document.querySelector(`#order${id}`).style.display = 'none';
     document.querySelector(`#totalText`).textContent = `Total value: £${totalValue - price * quantity}`
+  }
+
+  function checkStock(orders) {
+    var message = '';
+    var isSuccess = true;
+
+    orders.forEach((order) => {
+      if (order.quantity > order.product.stock) {
+        message += `Not enough stock! Only ${order.product.stock} ${order.product.product_name} left.\n`;
+        isSuccess = false;
+      }
+    })
+
+    if (isSuccess) {
+      message = 'All the orders have enough stock!'
+    }
+
+    return {
+      message: message,
+      stockIsEnough: isSuccess,
+    }
   }
 
 </script>
