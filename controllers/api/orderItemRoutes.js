@@ -21,10 +21,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const itemData = await OrderItem.findByPk(req.params.id, {
-      include: [
-        { model: User, attributes: ['email'] },
-        { model: Product, attributes: ['price'] },
-      ],
+      include: [{ model: User }, { model: Product }],
     });
     if (!itemData) {
       res.status(200).json('No order data is found!');
@@ -38,7 +35,7 @@ router.get('/:id', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
   try {
     const itemData = await OrderItem.findAll({
-      include: [{ model: Product, attributes: ['product_name', 'price'] }],
+      include: [{ model: Product }],
       where: {
         user_id: req.params.id,
         confirmed: false,
