@@ -183,7 +183,7 @@ router.get('/categories', withAuth, async (req, res) => {
       include: [
         {
           model: Product,
-          attributes: ['product_name'],
+          attributes: ['product_name', 'imgurl'],
         },
       ],
     });
@@ -205,7 +205,7 @@ router.get('/categories/:id', withAuth, async (req, res) => {
   try {
     const categoryId = req.params.id;
     const categoryData = await Product.findAll({
-      // include: [Category],
+      // attributes: ['id', 'product_name', 'imgurl'],
       where: {
         category_id: categoryId,
       },

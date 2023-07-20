@@ -1,21 +1,21 @@
 <!-- categoryList.handlebars -->
+<div class="categoryList">
+  <h1>{{ categoryName }}</h1>
 
-<!-- categoryList.handlebars -->
-
-<h1>{{ categoryName }}</h1>
-
-<ul>
-  {{#each products}}
-    <li>
-      <a href="/product/{{ id }}">{{ product_name }}</a>
-      <p> £{{price}}</p>
-      
-    </li>
-  {{/each}}
-</ul>
-
-
-
+  <div class="productGrid">
+    {{#each products as | product |}}
+      <div class="productItem">
+        <div class="productImage">
+          <img src="/product-images/{{imgurl}}" alt="{{product_name}}">
+        </div>
+        <div class="productDetails">
+          <a href="/product/{{ id }}" class="productName">{{ product_name }}</a>
+          <p class="productPrice">£{{price}}</p>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
 
 
 
