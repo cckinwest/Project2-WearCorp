@@ -32,6 +32,9 @@ Product.init(
       allowNull: false,
       defaultValue: 'placeholder.jpg',
     },
+    description: {
+      type: DataTypes.STRING,
+    },
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,

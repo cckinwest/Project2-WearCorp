@@ -13,6 +13,11 @@ OrderItem.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    imgurl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'placeholder.jpg',
+    },
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,

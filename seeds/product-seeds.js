@@ -7,6 +7,8 @@ const productData = [
     stock: 15,
     category_id: 1,
     imgurl: 'Bape-College-Tee-Black.jpg',
+    description:
+      'BAPE runs approximately one size small compared to traditional US sizing. We recommend moving up at least one whole size when purchasing a BAPE piece of clothing.',
   },
   {
     product_name: 'Stussy Basic T-shirt Men',
@@ -14,6 +16,8 @@ const productData = [
     stock: 22,
     category_id: 1,
     imgurl: 'tees-stussy-womensmens-basic-stc3bcssy-pigment-dyed-tee-blue.jpg',
+    description:
+      'The Stussy Basic T-Shirt is a blue tee with white prints made of skin-friendly and breathable 100% cotton fabric. The Stussy Basic T-Shirt Blue has a crew neck with a closed seam.',
   },
   {
     product_name: 'Supreme Ronin Tee Men',
@@ -21,6 +25,8 @@ const productData = [
     stock: 12,
     category_id: 1,
     imgurl: 'supreme-ronin.jpg',
+    description:
+      'Supreme has joined forces with DC Ronin for a limited collection featuring written and drawn by the legendary Frank Miller - renowned for his comic book stories and graphic novels. .',
   },
   {
     product_name: 'Stussy Kittens Tee Men',
@@ -28,6 +34,7 @@ const productData = [
     stock: 25,
     category_id: 1,
     imgurl: 'stussy-kittens.jpg',
+    description: '',
   },
   {
     product_name: 'Eric Emanuel EE Basic Short Men',
@@ -35,6 +42,7 @@ const productData = [
     stock: 22,
     category_id: 2,
     imgurl: 'Eric-Emanuel-EE-Basic-Short-Black-Black.jpg',
+    description: '',
   },
   {
     product_name: 'Eric Emanuel x BAPE Miami Basic Short Men',
@@ -42,13 +50,15 @@ const productData = [
     stock: 22,
     category_id: 2,
     imgurl: 'Eric-Emanuel-EE-Basic-Short-Black-Black.jpg',
+    description: '',
   },
   {
-    product_name: 'Fear of God Essentials Core Collection Sweatshort Men',
+    product_name: 'Fear of God Essentials Sweatshort Men',
     price: 29.99,
     stock: 22,
     category_id: 2,
     imgurl: 'Fear-of-God-Essentials.jpg',
+    description: '',
   },
   {
     product_name: 'Fear of God Essentials Volley Shorts',
@@ -56,13 +66,15 @@ const productData = [
     stock: 22,
     category_id: 2,
     imgurl: 'FEAR-OF-GOD-ESSENTIALS-Volley-Shorts-Moss.jpg',
+    description: '',
   },
   {
-    product_name: 'Off-White Catalina Rectangular Frame Sunglasses Men',
+    product_name: 'Off-White Catalina Rect Frame Sunglasses Men',
     price: 187.0,
     stock: 22,
     category_id: 3,
     imgurl: 'OFF-WHITE-Catalina-Rectangular-Frame-Sunglasses.jpg',
+    description: '',
   },
   {
     product_name: 'Louis Vuitton Sunglasses Cyclone Men',
@@ -70,13 +82,15 @@ const productData = [
     stock: 25,
     category_id: 3,
     imgurl: 'Louis-Vuitton-Sunglasses-Cyclone-Black-Black.jpg',
+    description: '',
   },
   {
-    product_name: 'Ray-Ban Clubmaster Oversized Sunglasses Men',
+    product_name: 'Ray-Ban Clubmaster Sunglasses Men',
     price: 127.0,
     stock: 22,
     category_id: 3,
     imgurl: 'rayban-clubmaster.jpg',
+    description: '',
   },
   {
     product_name: 'Dior DIORCLUB M1U Sunglasses',
@@ -84,6 +98,7 @@ const productData = [
     stock: 28,
     category_id: 3,
     imgurl: 'Dior-DIORCLUB-M1U-Sunglasses-Navy-Blue.jpg',
+    description: '',
   },
   {
     product_name: 'Nike Air Force 1 Low',
@@ -91,6 +106,7 @@ const productData = [
     stock: 88,
     category_id: 4,
     imgurl: 'Nike-Air-Force-1-Low-LE-Triple-White-GS-Product.jpg',
+    description: '',
   },
   {
     product_name: 'adidas Yeezy Slide',
@@ -98,6 +114,7 @@ const productData = [
     stock: 45,
     category_id: 4,
     imgurl: 'adidas-Yeezy-Slide-Black-Product.jpg',
+    description: '',
   },
   {
     product_name: 'Dior B23 Low Top',
@@ -105,6 +122,7 @@ const productData = [
     stock: 5,
     category_id: 4,
     imgurl: 'Dior-B23-Low-Top-Logo-Oblique-Product.jpg',
+    description: '',
   },
   {
     product_name: 'Dior B27 Low',
@@ -112,6 +130,7 @@ const productData = [
     stock: 3,
     category_id: 4,
     imgurl: 'Dior-B27-Low-Gray-White-Product.jpg',
+    description: '',
   },
 ];
 

@@ -234,7 +234,7 @@ router.get('/basket', withAuth, async (req, res) => {
       include: [
         {
           model: Product,
-          attributes: ['product_name', 'price'],
+          attributes: ['product_name', 'price', 'imgurl'],
         },
       ],
       where: {
