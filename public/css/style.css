@@ -342,9 +342,11 @@ nav a:not(:last-child) {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Style for the form group */
-.form-group {
-  margin-top: 20px;
+/* Container for the total value and checkout button */
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Style the checkout button */
