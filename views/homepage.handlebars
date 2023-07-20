@@ -9,7 +9,7 @@
     <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
   </div>
   <p>Price: £{{product.price}}</p>
-  <a href="{{product.handlebar}}" class="buy-now-button">Buy Now</a>
+  <button class="buy-now-button" id="{{product.id}}" onClick="buyOne({{product.id}}, {{user_id}}, {{product.price}})">Buy Now</button>
 </div>
 {{/each}}
 <footer class="card-footer">
@@ -24,3 +24,40 @@
     <li><img src="/payment-images/apple-pay.png" alt="Apple Pay"></li>
   </ul>
 </footer>
+
+<script>
+  async function buyOne(id, userId, unitPrice) {    
+
+    await fetch(`/api/orderItems`, {
+      method: 'POST',
+      body: JSON.stringify({
+        quantity: 1,
+        confirmed: false,
+        product_id: id,
+        user_id: userId,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const response = await fetch(`/api/users/${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const userData = await response.json();
+
+    var totalValue = parseFloat(userData.totalValue);
+
+    totalValue += unitPrice;
+
+    await fetch(`/api/users/${userId}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        totalValue: totalValue,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    return;
+  }
+</script>
