@@ -7,12 +7,13 @@
   </div>
   <div class="homepage-image" style="min-height: 350px;">
     <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
-  </div>
+  </div>  
   <p>Price: £{{product.price}}</p>
-  <button class="buy-now-button" id="{{product.id}}" onClick="buyOne({{product.id}}, {{user_id}}, {{product.price}})">Buy Now</button>
+  <button class="buy-now-button" id="buyNow{{product.id}}" onClick="buyOne({{product.id}}, {{product.price}})">Buy Now</button>
 </div>
 {{/each}}
-<footer class="card-footer">
+
+<footer class="card-footer" id="footer{{user_id}}">
   <p>Accepted Payment Methods:</p>
   <ul class="payment-methods">
     <li><img src="/payment-images/visa.png" alt="Visa"></li>
@@ -26,7 +27,9 @@
 </footer>
 
 <script>
-  async function buyOne(id, userId, unitPrice) {    
+  async function buyOne(id, unitPrice) {
+
+    const userId = parseInt(document.querySelector('.card-footer').id.slice(6));
 
     await fetch(`/api/orderItems`, {
       method: 'POST',
