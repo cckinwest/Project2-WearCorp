@@ -1,3 +1,4 @@
+
 <div class="basket-container">
   {{#each orderItems as |orderItem| }}
   <div class="order-item" id='order{{orderItem.id}}'>
@@ -11,7 +12,8 @@
     </div>      
   </div>
   {{/each}}
-  <p id="totalText">Total value: £{{totalValue}}</p>
+
+  <p class="total-value">Total value: £{{totalValue}}</p>
 
   <div class="form-group">
     <label for="addressText">Address for delivery: </label>

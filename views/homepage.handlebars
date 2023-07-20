@@ -1,12 +1,26 @@
-<!-- Loop over each object in the products array -->
 {{#each products as |product| }}
 <div class="product-box">
-  <h2>
-    <a href="/product/{{product.id}}">{{product.product_name}}</a>
-  </h2>
-  <div class="homepage-image">
+  <div class="title-container" style="min-height: 50px;">
+    <h2>
+      <a href="/product/{{product.id}}">{{product.product_name}}</a>
+    </h2>
+  </div>
+  <div class="homepage-image" style="min-height: 350px;">
     <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
   </div>
   <p>Price: £{{product.price}}</p>
+  <a href="{{product.handlebar}}" class="buy-now-button">Buy Now</a>
 </div>
 {{/each}}
+<footer class="card-footer">
+  <p>Accepted Payment Methods:</p>
+  <ul class="payment-methods">
+    <li><img src="/payment-images/visa.png" alt="Visa"></li>
+    <li><img src="/payment-images/mastercard.png" alt="Mastercard"></li>
+    <li><img src="/payment-images/amex.png" alt="American Express"></li>
+    <li><img src="/payment-images/discover.png" alt="Discover"></li>
+    <li><img src="/payment-images/PayPal.png" alt="PayPal"></li>
+    <li><img src="/payment-images/google-pay.png" alt="Google Pay"></li>
+    <li><img src="/payment-images/apple-pay.png" alt="Apple Pay"></li>
+  </ul>
+</footer>
