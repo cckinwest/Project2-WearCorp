@@ -180,6 +180,106 @@ nav a:not(:last-child) {
   margin: 0 auto;
 }
 
+.category {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #fffdfd;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+/* Style for the category name link */
+.category h2 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.category h2 a:hover {
+  text-decoration: underline;
+}
+.categoryList {
+  display: inline-block;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.categoryList h1 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.categoryList h1 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.categoryList h1 a:hover {
+  text-decoration: underline;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  justify-items: center;
+}
+
+.productItem {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.productImage img {
+  max-width: 100%;
+  height: auto;
+  width: 150px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.productDetails {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.productName {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+.productName:hover {
+  color: #007bff;
+}
+
+.productPrice {
+  font-size: 16px;
+}
+
+/* Hover effects for the product items */
+.productItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.productItem:hover img {
+  transform: scale(1.05);
+
 .buy-now-button {
   display: inline-block;
   padding: 10px 20px;
@@ -261,4 +361,5 @@ nav a:not(:last-child) {
 .total-value {
   font-weight: bold;
   margin-top: 20px;
+
 }

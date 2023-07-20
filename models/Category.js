@@ -13,6 +13,11 @@ Category.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    imgurl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'placeholder.jpg',
+    },
     category_name: {
       type: DataTypes.STRING,
       allowNull: false,
