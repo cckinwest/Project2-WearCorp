@@ -1,11 +1,10 @@
-{{#each categories as |category| }}
-<div class="category">
-  
-    
-    <h2>      
-      <a href="/categories/{{category.id}}">{{category.category_name}}</a>
-      <img src="/category-images/{{category.imgurl}}" alt="{{category.category_name}}">
-    </h2>
-  
+<div class="categories-container">
+  {{#each categories as |category| }}
+    <div class="category">
+      <h2>      
+        <a href="/categories/{{category.id}}">{{category.category_name}}</a>
+        <img src="/category-images/{{category.imgurl}}" alt="{{category.category_name}}">
+      </h2>
+    </div>
+  {{/each}}
 </div>
-{{/each}}

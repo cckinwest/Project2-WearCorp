@@ -285,25 +285,61 @@ nav a:not(:last-child) {
   margin-top: 20px;
 }
 
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .category {
+  /* Your existing styles for .category */
   display: inline-block;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #fffdfd;
-  border-radius: 5px;
+  width: 200px;
+  margin: 15px;
+  padding: 20px;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
-/* Style for the category name link */
-.category h2 a {
+.category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category h2 {
+  margin-bottom: 15px;
+}
+
+.category a {
+  display: block;
   color: #333;
+  font-size: 18px;
+  font-weight: bold;
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
-.category h2 a:hover {
-  text-decoration: underline;
+.category a:hover {
+  color: #007bff;
 }
+
+.category img {
+  width: 150px; /* Set a fixed width for the images */
+  height: 150px; /* Set a fixed height for the images */
+  object-fit: cover; /* Maintain aspect ratio while covering the container */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.category:hover img {
+  transform: scale(1.1);
+}
+
 .categoryList {
   display: inline-block;
   margin: 10px;
@@ -331,10 +367,10 @@ nav a:not(:last-child) {
 }
 
 .productGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .productItem {
@@ -342,7 +378,11 @@ nav a:not(:last-child) {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  flex: 1 0 200px; /* Allow the boxes to grow to a maximum of 200px width */
+  min-width: 200px; /* Set a minimum width for each box */
+  max-width: 300px; /* Set a maximum width for each box */
   display: flex;
+  flex-direction: column;
   align-items: center;
   transition: transform 0.3s ease-in-out;
 }
@@ -359,13 +399,21 @@ nav a:not(:last-child) {
 .productDetails {
   flex-grow: 1;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Fill the available height */
 }
 
 .productName {
   color: #333;
   text-decoration: none;
   font-size: 18px;
-  transition: color 0.3s ease-in-out;
+  margin-bottom: 10px; /* Add some space between name and price */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Show only two lines of text */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .productName:hover {
@@ -374,14 +422,4 @@ nav a:not(:last-child) {
 
 .productPrice {
   font-size: 16px;
-}
-
-/* Hover effects for the product items */
-.productItem:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.productItem:hover img {
-  transform: scale(1.05);
 }
