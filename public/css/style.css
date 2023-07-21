@@ -165,7 +165,7 @@ nav a:not(:last-child) {
   width: calc(25% - 40px);
   text-align: center;
   box-sizing: border-box;
-  display: inline-block;
+  /*display: inline-block;*/
   vertical-align: top;
 }
 
@@ -371,6 +371,7 @@ nav a:not(:last-child) {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  flex: 1;
 }
 
 .productItem {
@@ -378,9 +379,11 @@ nav a:not(:last-child) {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-  flex: 1 0 200px; /* Allow the boxes to grow to a maximum of 200px width */
-  min-width: 200px; /* Set a minimum width for each box */
-  max-width: 300px; /* Set a maximum width for each box */
+  width: calc(22vw - 40px);
+  /*flex: 1 0 200px;*/ /* Allow the boxes to grow to a maximum of 200px width */
+  /*min-width: 200px;*/ /* Set a minimum width for each box */
+  /*max-width: 300px;*/ /* Set a maximum width for each box */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -423,3 +426,40 @@ nav a:not(:last-child) {
 .productPrice {
   font-size: 16px;
 }
+
+/* responsive media query */
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+@media screen and (max-width: 1500px) {
+  nav {
+    flex-wrap: wrap;
+  }
+
+  .productItem {
+    width: calc(40vw - 40px);
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  
+  .product-box {
+    width: calc(50% - 40px);
+  }
+
+}
+
+@media screen and (max-width: 960px) {
+  .product-box {
+    width: calc(100% - 40px);
+  }
+
+  .productItem {
+    width: calc(80vw - 40px);
+  }
+}
+
+

@@ -1,17 +1,19 @@
-{{#each products as |product| }}
-<div class="product-box">
-  <div class="title-container" style="min-height: 50px;">
-    <h2>
-      <a href="/product/{{product.id}}">{{product.product_name}}</a>
-    </h2>
+<div class="products-container">
+  {{#each products as |product| }}
+  <div class="product-box">
+    <div class="title-container">
+      <h2>
+        <a href="/product/{{product.id}}">{{product.product_name}}</a>
+      </h2>
+    </div>
+    <div class="homepage-image">
+      <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
+    </div>  
+    <p>Price: £{{product.price}}</p>
+    <button class="buy-now-button" id="buyNow{{product.id}}" onClick="buyOne({{product.id}}, {{product.price}})">Buy Now</button>
   </div>
-  <div class="homepage-image" style="min-height: 350px;">
-    <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
-  </div>  
-  <p>Price: £{{product.price}}</p>
-  <button class="buy-now-button" id="buyNow{{product.id}}" onClick="buyOne({{product.id}}, {{product.price}})">Buy Now</button>
+  {{/each}}
 </div>
-{{/each}}
 
 <footer class="card-footer" id="footer{{user_id}}">
   <p>Accepted Payment Methods:</p>
