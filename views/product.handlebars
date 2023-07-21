@@ -24,7 +24,7 @@
     <div class="action-box">
     <div class="quantity">
       <label for="quantity">Quantity: </label>
-      <input id="quantity" type="number"/>
+      <input id="quantity" type="number" min="1" max="{{product.stock}}" required/>
     </div>
     <button id="addToBasketButton" type="button" onClick="addToCart({{product.id}}, {{user_id}})">Add to Basket</button>
   </div>
