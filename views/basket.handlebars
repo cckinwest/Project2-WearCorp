@@ -8,7 +8,7 @@
       <p>Unit Price: £{{orderItem.product.price}}</p>
       <p>Quantity: {{orderItem.quantity}}</p>
       <p>Confirmed: {{orderItem.confirmed}}</p>
-      <button id='delete{{orderItem.id}}' onClick="handleDelete({{orderItem.id}})">Delete</button>
+      <button class="deleteBtn" id='delete{{orderItem.id}}' onClick="handleDelete({{orderItem.id}})">Delete</button>
     </div>      
   </div>
   {{/each}}

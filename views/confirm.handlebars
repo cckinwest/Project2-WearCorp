@@ -1,0 +1,28 @@
+<div>
+    <p>Hi, {{username}}, your order is successfully processed.</p>
+    <p>The details are as follows:</p>
+    <div class="basket-container">    
+        {{#each items as |item|}}
+        <div class="order-item">
+            <div>            
+                <p>Product Name: {{item.product.product_name}}</p>
+                <p>Price: £{{item.product.price}}</p>
+                <p>Quantity: {{item.quantity}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div style="margin: 2px">
+        <p>The items will be delivered to the following address:</p>
+        <p>{{address}}</p>
+        <p>An email will be sent to {{email}} for confirmation.</p>
+    </div>
+
+    <button id="okBtn" onClick="goBackHome()">Ok</button>    
+</div>
+
+<script>
+    function goBackHome() {
+        location.replace('/');
+    }
+</script>

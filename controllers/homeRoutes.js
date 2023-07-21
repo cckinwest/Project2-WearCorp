@@ -33,7 +33,7 @@ router.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-router.get('/order/success/:id', async (req, res) => {
+router.get('/order/confirm/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id);
 
@@ -96,17 +96,34 @@ router.get('/order/success/:id', async (req, res) => {
       req.session.user_id = req.params.id;
     });
 
-    res.render('success', {
+    res.render('confirm', {
       items,
       username: userinfo.username,
       email: userinfo.email,
       address: userinfo.address,
       logged_in: req.session.logged_in,
-      user_id: req.session.user_id,
+      user_id: req.params.id,
     });
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.get('/order/success/:id', async (req, res) => {
+  const userData = await User.findByPk(req.params.id);
+
+  const userinfo = userData.get({ plain: true });
+
+  req.session.save(() => {
+    req.session.logged_in = true;
+    req.session.user_id = req.params.id;
+  });
+
+  res.render('success', {
+    username: userinfo.username,
+    logged_in: req.session.logged_in,
+    user_id: req.params.id,
+  });
 });
 
 router.get('/order/cancel/:id', async (req, res) => {
