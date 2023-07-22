@@ -10,7 +10,7 @@
       <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
     </div>  
     <p>Price: £{{product.price}}</p>
-    <button class="buy-now-button" id="buyNow{{product.id}}" onClick="buyOne({{product.id}}, {{product.price}})">Buy Now</button>
+    <button class="buy-now-button" onClick="buyOne({{product.id}}, {{product.price}})">Buy Now</button>
   </div>
   {{/each}}
 </div>
@@ -30,7 +30,7 @@
 
 <script>
   async function buyOne(id, unitPrice) {
-
+    
     const userId = parseInt(document.querySelector('.card-footer').id.slice(6));
 
     await fetch(`/api/orderItems`, {
@@ -63,6 +63,22 @@
       headers: { 'Content-Type': 'application/json' },
     });
 
-    return;
+    const productName = "{{product.product_name}}";
+    showMessage(`Your item has been added to the basket.`);
+  }
+
+  function showMessage(message) {
+    // Create a custom notification element
+    const notification = document.createElement("div");
+    notification.className = "custom-notification";
+    notification.innerText = message;
+
+    // Append the notification element to the document body
+    document.body.appendChild(notification);
+
+    // Automatically remove the notification after a few seconds (you can adjust the time as needed)
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
   }
 </script>
