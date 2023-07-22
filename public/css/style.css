@@ -383,7 +383,7 @@ nav a:not(:last-child) {
   /*flex: 1 0 200px;*/ /* Allow the boxes to grow to a maximum of 200px width */
   /*min-width: 200px;*/ /* Set a minimum width for each box */
   /*max-width: 300px;*/ /* Set a maximum width for each box */
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -449,8 +449,8 @@ nav a:not(:last-child) {
 #addressBtn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #FAF3F0;
-  color: #000; 
+  background-color: #faf3f0;
+  color: #000;
   text-decoration: none;
   border-radius: 5px;
 }
@@ -458,8 +458,8 @@ nav a:not(:last-child) {
 .deleteBtn {
   display: inline-block;
   padding: 5px 10px;
-  background-color: #FAF3F0;
-  color: #000; 
+  background-color: #faf3f0;
+  color: #000;
   text-decoration: none;
   border-radius: 5px;
 }
@@ -467,10 +467,39 @@ nav a:not(:last-child) {
 #okBtn {
   display: inline-block;
   padding: 5px 10px;
-  background-color: #FAF3F0;
-  color: #000; 
+  background-color: #faf3f0;
+  color: #000;
   text-decoration: none;
   border-radius: 5px;
+}
+
+/* Styling for the buttons */
+.login-form button,
+.signup-form button {
+  background-color: #007bff; /* Blue color */
+  color: #fff; /* Text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Optional: Add some hover effect for the buttons */
+.login-form button:hover,
+.signup-form button:hover {
+  background-color: #0056b3; /* Darker shade of blue on hover */
+}
+
+.custom-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (max-width: 1500px) {
@@ -484,11 +513,9 @@ nav a:not(:last-child) {
 }
 
 @media screen and (max-width: 1280px) {
-  
   .product-box {
     width: calc(50% - 40px);
   }
-
 }
 
 @media screen and (max-width: 960px) {
@@ -500,5 +527,3 @@ nav a:not(:last-child) {
     width: calc(80vw - 40px);
   }
 }
-
-
