@@ -189,6 +189,12 @@ nav a:not(:last-child) {
   border-radius: 5px;
 }
 
+.buy-now-button:disabled {
+  background-color: #FAF3F0; /* Blue color */
+  color: #B7B7B7; /* White text */
+  border: none;
+}
+
 .buy-now-button:hover {
   background-color: #0056b3; /* Darker blue color on hover */
 }

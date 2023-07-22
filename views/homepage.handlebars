@@ -10,7 +10,8 @@
       <img src="/product-images/{{product.imgurl}}" alt="{{product.product_name}}">
     </div>  
     <p>Price: £{{product.price}}</p>
-    <button class="buy-now-button" onClick="buyOne({{product.id}}, {{product.price}})">Buy Now</button>
+        
+    <button class="buy-now-button" onClick="buyOne({{product.id}}, {{product.price}})">Buy Now</button>    
   </div>
   {{/each}}
 </div>
@@ -64,6 +65,7 @@
     });
 
     const productName = "{{product.product_name}}";
+    
     showMessage(`Your item has been added to the basket.`);
   }
 
@@ -80,5 +82,19 @@
     setTimeout(() => {
       notification.remove();
     }, 3000);
+  }
+
+  const buttonArr = document.querySelectorAll('.buy-now-button');
+
+  if (document.querySelector('.card-footer').id === 'footer') {
+    for (i = 0; i < buttonArr.length; i++) {
+      buttonArr[i].disabled = true;
+      buttonArr[i].innerHTML = 'Please Login'
+    }    
+  } else {
+    for (i = 0; i < buttonArr.length; i++) {
+      buttonArr[i].disabled = false;
+      buttonArr[i].innerHTML = 'Buy Now'
+    }
   }
 </script>

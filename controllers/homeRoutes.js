@@ -4,6 +4,141 @@ const withAuth = require('../utils/auth');
 
 const stripe = require('stripe')(process.env.STRIPE_API_SECRET_KEY);
 
+router.get('/', async (req, res) => {
+  try {
+    const productData = await Product.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ['category_name'],
+        },
+      ],
+    });
+
+    const products = productData.map((product) => product.get({ plain: true }));
+
+    res.render('homepage', {
+      products,
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/product/:id', withAuth, async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const productData = await Product.findByPk(productId, {
+      include: [
+        {
+          model: Category,
+          attributes: ['category_name'],
+        },
+      ],
+    });
+
+    const userData = await User.findByPk(req.session.user_id);
+
+    const product = productData.get({ plain: true });
+    const user = userData.get({ plain: true });
+    console.log(product);
+    res.render('product', {
+      product,
+      user_id: req.session.user_id,
+      totalValue: user.totalValue,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/categories', async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    const categoryData = await Category.findAll({
+      include: [
+        {
+          model: Product,
+          attributes: ['product_name', 'imgurl'],
+        },
+      ],
+    });
+
+    const categories = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
+
+    res.render('category', {
+      categories,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/categories/:id', withAuth, async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const categoryData = await Product.findAll({
+      // attributes: ['id', 'product_name', 'imgurl'],
+      where: {
+        category_id: categoryId,
+      },
+    });
+
+    const categoryName = categoryData.category_name;
+
+    const products = categoryData.map((category) =>
+      category.get({ plain: true })
+    );
+
+    res.render('categoryList', {
+      categoryName,
+      products,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/basket', withAuth, async (req, res) => {
+  try {
+    const orderItemsData = await OrderItem.findAll({
+      include: [
+        {
+          model: Product,
+          attributes: ['product_name', 'price', 'imgurl'],
+        },
+      ],
+      where: {
+        user_id: req.session.user_id,
+        confirmed: false,
+      },
+    });
+
+    const orderItems = orderItemsData.map((item) => item.get({ plain: true }));
+
+    const userData = await User.findByPk(req.session.user_id);
+
+    const user = userData.get({ plain: true });
+
+    res.render('basket', {
+      orderItems,
+      user_id: req.session.user_id,
+      totalValue: user.totalValue,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.post('/create-checkout-session', async (req, res) => {
   try {
     const lineItems = req.body.map((item) => {
@@ -141,145 +276,6 @@ router.get('/order/cancel/:id', async (req, res) => {
     logged_in: req.session.logged_in,
     user_id: req.session.user_id,
   });
-});
-
-router.get('/', withAuth, async (req, res) => {
-  try {
-    const productData = await Product.findAll({
-      include: [
-        {
-          model: Category,
-          attributes: ['category_name'],
-        },
-      ],
-    });
-
-    const products = productData.map((product) => product.get({ plain: true }));
-
-    res.render('homepage', {
-      products,
-      logged_in: req.session.logged_in,
-      user_id: req.session.user_id,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/product/:id', withAuth, async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const productData = await Product.findByPk(productId, {
-      include: [
-        {
-          model: Category,
-          attributes: ['category_name'],
-        },
-      ],
-    });
-
-    const userData = await User.findByPk(req.session.user_id);
-
-    const product = productData.get({ plain: true });
-    const user = userData.get({ plain: true });
-    console.log(product);
-    res.render('product', {
-      product,
-      user_id: req.session.user_id,
-      totalValue: user.totalValue,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/categories', withAuth, async (req, res) => {
-  try {
-    // Get all projects and JOIN with user data
-    const categoryData = await Category.findAll({
-      include: [
-        {
-          model: Product,
-          attributes: ['product_name', 'imgurl'],
-        },
-      ],
-    });
-
-    const categories = categoryData.map((category) =>
-      category.get({ plain: true })
-    );
-
-    res.render('category', {
-      categories,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/categories/:id', withAuth, async (req, res) => {
-  try {
-    const categoryId = req.params.id;
-    const categoryData = await Product.findAll({
-      // attributes: ['id', 'product_name', 'imgurl'],
-      where: {
-        category_id: categoryId,
-      },
-    });
-
-    const categoryName = categoryData.category_name;
-
-    const products = categoryData.map((category) =>
-      category.get({ plain: true })
-    );
-
-    res.render('categoryList', {
-      categoryName,
-      products,
-      user_id: req.session.user_id,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/basket', withAuth, async (req, res) => {
-  try {
-    const orderItemsData = await OrderItem.findAll({
-      include: [
-        {
-          model: Product,
-          attributes: ['product_name', 'price', 'imgurl'],
-        },
-      ],
-      where: {
-        user_id: req.session.user_id,
-        confirmed: false,
-      },
-    });
-
-    const orderItems = orderItemsData.map((item) => item.get({ plain: true }));
-
-    const userData = await User.findByPk(req.session.user_id);
-
-    const user = userData.get({ plain: true });
-
-    res.render('basket', {
-      orderItems,
-      user_id: req.session.user_id,
-      totalValue: user.totalValue,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/details', (req, res) => {
-  res.render('details');
 });
 
 router.get('/login', (req, res) => {
