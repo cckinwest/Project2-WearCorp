@@ -2,7 +2,7 @@
     <h2>Hi, {{username}}. Your order is successfully processed!</h2>
     <br/>
     <label for="address-input" style="display: inline-block; font-size: 1.2rem; margin: 0.625rem 0 0.25rem 0.3rem;">Delivery address: </label>
-    <input class="form-input" type="text" id="address-input" required/>
+    <input class="form-input" type="text" id="address-input" value="{{address}}" required/>
     <button id="addressBtn" onClick="handleAddressSubmit({{user_id}})">submit</button>
 </div>
 
@@ -18,5 +18,7 @@
 
         location.replace(`/order/confirm/${userId}`)
     }
+
+
 
 </script>
