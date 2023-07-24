@@ -26,7 +26,7 @@ const productData = [
     category_id: 1,
     imgurl: 'supreme-ronin.jpg',
     description:
-      'Supreme has joined forces with DC Ronin for a limited collection featuring written and drawn by the legendary Frank Miller - renowned for his comic book stories and graphic novels. .',
+      'Supreme has joined forces with DC Ronin for a limited collection featuring written and drawn by the legendary Frank Miller - renowned for his comic book stories and graphic novels.',
   },
   {
     product_name: 'Stussy Kittens Tee Men',
@@ -34,7 +34,8 @@ const productData = [
     stock: 25,
     category_id: 1,
     imgurl: 'stussy-kittens.jpg',
-    description: '',
+    description:
+      'The Stussy Basic T-Shirt is a black tee with Cats Design printed, made of skin-friendly and breathable 100% cotton fabric. The Stussy Basic T-Shirt Black has a crew neck with a closed seam.',
   },
   {
     product_name: 'Eric Emanuel EE Basic Short Men',
@@ -42,7 +43,8 @@ const productData = [
     stock: 22,
     category_id: 2,
     imgurl: 'Eric-Emanuel-EE-Basic-Short-Black-Black.jpg',
-    description: '',
+    description:
+      'The Eric Emanuel EE Basic Short Black is made of 100% polyester material with a grey shade and ribbed inner waistband.',
   },
   {
     product_name: 'Eric Emanuel x BAPE Miami Basic Short Men',
@@ -50,7 +52,8 @@ const productData = [
     stock: 22,
     category_id: 2,
     imgurl: 'Eric-Emanuel-EE-Basic-Short-Black-Black.jpg',
-    description: '',
+    description:
+      'The Eric Emanuel joined forces with BAPE for a limited EE Basic Short Brown/Yellow that is made of 100% polyester material with a grey shade and ribbed inner waistband.',
   },
   {
     product_name: 'Fear of God Essentials Sweatshort Men',
@@ -58,7 +61,8 @@ const productData = [
     stock: 22,
     category_id: 2,
     imgurl: 'Fear-of-God-Essentials.jpg',
-    description: '',
+    description:
+      'The Fear of God Essentials Sweatshort SS22 Stretch Limo is designed for comfort. It is a limited-edition, high-performance short designed for everyday wear.',
   },
   {
     product_name: 'Fear of God Essentials Volley Shorts',
@@ -66,7 +70,8 @@ const productData = [
     stock: 22,
     category_id: 2,
     imgurl: 'FEAR-OF-GOD-ESSENTIALS-Volley-Shorts-Moss.jpg',
-    description: '',
+    description:
+      'The FEAR OF GOD ESSENTIALS Volley Shorts Moss are a stylish and comfortable addition to any wardrobe. Made from a blend of polyester and spandex, these shorts are both durable and stretchy.',
   },
   {
     product_name: 'Off-White Catalina Rect Frame Sunglasses Men',
@@ -74,7 +79,8 @@ const productData = [
     stock: 22,
     category_id: 3,
     imgurl: 'OFF-WHITE-Catalina-Rectangular-Frame-Sunglasses.jpg',
-    description: '',
+    description:
+      'Off-White Catalina sunglasses are part of its Icons collection, which features signature styles. Made from glossy acetate, they have bold square frames and gold-tone arrow emblems on each arm.',
   },
   {
     product_name: 'Louis Vuitton Sunglasses Cyclone Men',
@@ -82,7 +88,8 @@ const productData = [
     stock: 25,
     category_id: 3,
     imgurl: 'Louis-Vuitton-Sunglasses-Cyclone-Black-Black.jpg',
-    description: '',
+    description:
+      'Louis Vuitton Cyclone sunglasses are part of the top sellers, which features signature styles.. Made from glossy acetate, they have Golden Lous Vuitton symbol on each arm.',
   },
   {
     product_name: 'Ray-Ban Clubmaster Sunglasses Men',
@@ -90,7 +97,8 @@ const productData = [
     stock: 22,
     category_id: 3,
     imgurl: 'rayban-clubmaster.jpg',
-    description: '',
+    description:
+      'The classic Ray-Ban Clubmaster just received a modern and trendy makeover with Ray-Ban Clubmaster Square sunglasses. Featuring stylish square lenses, these Clubmaster spinoffs will ensure you stand out. ',
   },
   {
     product_name: 'Dior DIORCLUB M1U Sunglasses',
@@ -98,7 +106,8 @@ const productData = [
     stock: 28,
     category_id: 3,
     imgurl: 'Dior-DIORCLUB-M1U-Sunglasses-Navy-Blue.jpg',
-    description: '',
+    description:
+      'The DiorClub M1U sunglasses are a rectangular-shaped mask with a sportswear appeal. In keeping with the silver mirrored lenses in a blue Dior Oblique motif, the design features large spoilers.',
   },
   {
     product_name: 'Nike Air Force 1 Low',
@@ -106,7 +115,8 @@ const productData = [
     stock: 88,
     category_id: 4,
     imgurl: 'Nike-Air-Force-1-Low-LE-Triple-White-GS-Product.jpg',
-    description: '',
+    description:
+      'Go classic in the streets with these men Air Force 1 Low sneakers from Nike. In a White colourway, these exclusive sneaks are cut from smooth leather in the upper for a lasting wear.',
   },
   {
     product_name: 'adidas Yeezy Slide',
@@ -114,7 +124,8 @@ const productData = [
     stock: 45,
     category_id: 4,
     imgurl: 'adidas-Yeezy-Slide-Black-Product.jpg',
-    description: '',
+    description:
+      'First revealed in February 2022 at the Donda 2 listening event in Miami, the adidas Yeezy Slide Onyx features an all-black foam construction with a soft footbed for comfort.',
   },
   {
     product_name: 'Dior B23 Low Top',
@@ -122,7 +133,8 @@ const productData = [
     stock: 5,
     category_id: 4,
     imgurl: 'Dior-B23-Low-Top-Logo-Oblique-Product.jpg',
-    description: '',
+    description:
+      'The B23 low-top sneaker is set apart by its white and black Dior Oblique motif and transparent paneling. Essential details, such as eyelets and a lace-up front, a white and beige rubber sole.',
   },
   {
     product_name: 'Dior B27 Low',
@@ -130,7 +142,8 @@ const productData = [
     stock: 3,
     category_id: 4,
     imgurl: 'Dior-B27-Low-Gray-White-Product.jpg',
-    description: '',
+    description:
+      'Although brand new for this collection, the B27 low-top sneaker is already a House essential. Crafted in gray and white smooth calfskin, the style is adorned with beige and black Dior Oblique jacquard inserts on the sides.',
   },
 ];
 
