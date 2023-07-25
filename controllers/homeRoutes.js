@@ -158,8 +158,8 @@ router.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: lineItems,
-      success_url: `${process.env.ROOT_URL}/order/success/${req.session.user_id}`,
-      cancel_url: `${process.env.ROOT_URL}/order/cancel/${req.session.user_id}`,
+      success_url: `https://wearcorp-app-098bafb41b6f.herokuapp.com/order/success/${req.session.user_id}`,
+      cancel_url: `https://wearcorp-app-098bafb41b6f.herokuapp.com/order/cancel/${req.session.user_id}`,
     });
 
     res.json({ url: session.url });
