@@ -2,9 +2,7 @@ const router = require('express').Router();
 const { Product, Category, User, OrderItem } = require('../models');
 const withAuth = require('../utils/auth');
 
-const stripe = require('stripe')(
-  'sk_test_51NUueBAXhZAfHifwf5NrjWklP3SvWRNsLSGiCnu0hNBfdUgytS6DOFLPKMFJ2yMzyfVqjxY5K3SQtHCXxc3RDRgc00HK8letFL'
-);
+const stripe = require('stripe')(process.env.STRIPE_API_SECRET_KEY);
 
 router.get('/', async (req, res) => {
   try {
@@ -160,8 +158,8 @@ router.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: lineItems,
-      success_url: `https://wearcorp-app-098bafb41b6f.herokuapp.com/order/success/${req.session.user_id}`,
-      cancel_url: `https://wearcorp-app-098bafb41b6f.herokuapp.com/order/cancel/${req.session.user_id}`,
+      success_url: `${process.env.ROOT_URL}/order/success/${req.session.user_id}`,
+      cancel_url: `${process.env.ROOT_URL}/order/cancel/${req.session.user_id}`,
     });
 
     res.json({ url: session.url });
