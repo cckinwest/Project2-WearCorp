@@ -51,11 +51,14 @@ Enjoy a convenient and enjoyable shopping journey with our feature-packed web ap
 ## ScreenShot
 
 ![Alt text](./public/screenshots/Capture%20category.PNG)
+
 ![Alt text](./public/screenshots/Screenshot%20hompage.png)
 
 ## Links
 
 Deployed: https://wearcorp-app-098bafb41b6f.herokuapp.com/
+
+
 Github: https://github.com/cckinwest/Project2-WearCorp.git
 
 ## Questions
