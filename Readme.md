@@ -53,6 +53,10 @@ Enjoy a convenient and enjoyable shopping journey with our feature-packed web ap
 ![Alt text](./public/screenshots/Capture%20category.PNG)
 ![Alt text](./public/screenshots/Screenshot%20hompage.png)
 
+## Links
+
+Deployed: https://wearcorp-app-098bafb41b6f.herokuapp.com/
+Github: https://github.com/cckinwest/Project2-WearCorp.git
 
 ## Questions
 If you have any questions or need assistance with the WearCo E-commerce Shop, please feel free to reach out via the repository's contact information.
