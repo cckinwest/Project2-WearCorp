@@ -40,6 +40,19 @@ To run tests for the WearCo E-commerce Shop, use the following command:
 
 ## license
   NONE
+  
+## Conclusion
+Our application allows you to view detailed product descriptions, pricing, ensuring that you make informed purchasing decisions. Whether you're searching for the perfect casual outfit or the ideal pair of shoes for a special holidays, we have something for your holiday.
+
+Once you've found your favorite items, easily add them to your shopping cart and proceed to our secure checkout process. Your data security is our utmost priority, and we ensure a seamless and protected shopping experience.
+
+Enjoy a convenient and enjoyable shopping journey with our feature-packed web application. Upgrade your fashion game and find your perfect style today!
+
+## ScreenShot
+
+![Alt text](./public/screenshots/Capture%20category.PNG)
+![Alt text](./public/screenshots/Screenshot%20hompage.png)
+
 
 ## Questions
 If you have any questions or need assistance with the WearCo E-commerce Shop, please feel free to reach out via the repository's contact information.
