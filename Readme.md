@@ -17,13 +17,13 @@
 - Stripe (for building payment gateway)
 
 ## Table of Contents
-  - [Installation](#Installation)
-  - [Database_setup](#Database)
-  - [Homepage](#Homepage)
-  - [Category](#Category)
-  - [Basket](#Basket)
-  - [Responsiveness](#Responsiveness)
-  - [Deployment](#Deployment)
+  - [Installation](#installation)
+  - [Database_setup](#database)
+  - [Homepage](#homepage)
+  - [Category](#category)
+  - [Basket](#basket)
+  - [Responsiveness](#responsiveness)
+  - [Deployment](#deployment)
 
 ## Installation 
 - Go to the WearCo [Link](https://github.com/cckinwest/Project2-WearCorp), click the button in the circle:
