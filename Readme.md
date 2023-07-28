@@ -1,67 +1,98 @@
 # WearCo 
-
-  ![App license](https://img.shields.io/badge/license-NONE-blue.svg)
-
-
-## Description
-  Welcome to the WearCo E-commerce Shop repository! This is an online store built with Node.js, Express, and Sequelize, offering a wide range of trendy clothing and accessories. Wether you're lookking for stylish t-shirts,comfortable shorts, fashionable sunglasses, or trendy shoes, WearCo has you covered.
+  Welcome to the WearCo E-commerce Shop repository! This is an online store built by Chi, Diogo, and Haseeb, offering a wide range of trendy clothing and accessories. Whether you're looking for stylish T-shirts, comfortable shorts, fashionable sunglasses, or trendy shoes, WearCo has you covered.
 
 ## Features
 
-- Browse through a diverse selection of t-shirts, shorts, sunglasses, and shoes.
-- View detailed product descriptions, pricing, and customer reviews.
-- Add products to your shopping cart and proceed to a secure checkout process.
+- Browse through a diverse selection of T-shirts, shorts, sunglasses, and shoes in the homepage.
+- View details about products including pictures, descriptions, and pricing.
+- Have a category page to filter products of the same category.
+- Add products to your shopping basket and proceed to a secure payment gateway.
+- Responsiveness to different sizes of screens to maximize customers' experience.
 
+## Technologies
+
+- Express (for constructing server)
+- Sequelize (for interacting with database)
+- Handlebars (for creating html templates)
+- Stripe (for building payment gateway)
 
 ## Table of Contents
-  - [Installation](#installation)
-  - [TechnologiesUsed](#TechnologiesUsed)
-  - [License](#license)
-  - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [Questions](#questions)
-
-## TechnologiesUsed
-
-- Node.js
-- Express
-- Sequelize
-- HTML
-- CSS
-- JavaScript
+  - [Installation](#Installation)
+  - [Database_setup](#Database)
+  - [Homepage](#Homepage)
+  - [Category](#Category)
+  - [Basket](#Basket)
+  - [Responsiveness](#Responsiveness)
+  - [Deployment](#Deployment)
 
 ## Installation 
-To set up the WearCo E-commerce Shop on your local machine, simply run the following command:
-  npm install
+- Go to the WearCo [Link](https://github.com/cckinwest/Project2-WearCorp), click the button in the circle:
+  ![github](./screenshot/github.png)
+- Go to the empty directory, type the following command in the terminal:
+  ![gitclone](./screenshot/gitclone.png)
+- To set up the WearCo E-commerce Shop on your local machine, simply run the command 'npm i' in the terminal to install all necessary package.
+  ![npmi](./screenshot/npmi.png)
 
-## Test 
-To run tests for the WearCo E-commerce Shop, use the following command:
-  npm run
+## Database 
+- Set up the database by first entering mysql by entering 'mysql -u root -p' and then the password:
+![mysql](./screenshot/mysql.png)
 
-## license
-  NONE
-  
-## Conclusion
-Our application allows you to view detailed product descriptions, pricing, ensuring that you make informed purchasing decisions. Whether you're searching for the perfect casual outfit or the ideal pair of shoes for a special holidays, we have something for your holiday.
+- Enter 'source db/schema.sql' to set up the database.
+![dbsetup](./screenshot/dbsetup.png)
 
-Once you've found your favorite items, easily add them to your shopping cart and proceed to our secure checkout process. Your data security is our utmost priority, and we ensure a seamless and protected shopping experience.
+- quit mysql, seed the data:
+![seed](./screenshot/seed.png)
 
-Enjoy a convenient and enjoyable shopping journey with our feature-packed web application. Upgrade your fashion game and find your perfect style today!
+## Homepage
+- On the first page of the application, we can browse all the items in the shop. 
+![homepage](./screenshot/homepage.png)
 
-## ScreenShot
+- Before login/signup, some button is disabled. We need to login/signup first.
+![login](./screenshot/login.png)
 
-![Alt text](./public/screenshots/Capture%20category.PNG)
+- After login/signup, the buy-now button is enabled.
+![afterLogin](./screenshot/homeAfterLogin.png)
 
-![Alt text](./public/screenshots/Screenshot%20hompage.png)
+- When clicking on the buy-now button, one item is ordered and put in the basket.
+![buyonebutton](./screenshot/buyonebutton.png)
 
-## Links
+- By clicking on the link of product, you will get into the product page. You can click on the 'quantity' and 'Add to Basket' to make order.
+![productPage](./screenshot/productPage.png)
 
-Deployed: https://wearcorp-app-098bafb41b6f.herokuapp.com/
+## Category
+- When you click on the category, the buttons for all categories are displayed.
+![category](./screenshot/category.png)
 
+- When clicking on each button, only the items of that category are displayed. You can also order item by clicking on the product page.
+![categoryProduct](./screenshot/categoryProduct.png)
 
-Github: https://github.com/cckinwest/Project2-WearCorp.git
+## Basket
+- The basket page show all the orders made before processing. You can delete orders.
+![basket](./screenshot/basket.png)
 
-## Questions
-If you have any questions or need assistance with the WearCo E-commerce Shop, please feel free to reach out via the repository's contact information.
+- When clicking checkout, you will get to a checkout page empowered by the Stripe.
+![checkout](./screenshot/paymentgateway.png)
 
-Thank you for choosing WearCo for your trendy clothing and accessory needs! Happy shopping!
+- When the order is successfully processed, you will get to a page to enter address for delivery.
+![address](./screenshot/address.png)
+
+- After entering the address, you finally get to the confirmation to show the items ordered, delivery address, and email.
+![confirmation](./screenshot/confirmation.png)
+
+## Responsiveness
+- Screen of large width (width > 1280px)
+![largeScreen](./screenshot/largeScreen.png)
+
+- Screen of large width (1280px > width > 960px)
+![mediumScreen](./screenshot/mediumScreen.png)
+
+- Screen of small width (960px > width)
+![smallScreen](./screenshot/smallScreen.png)
+
+## Deployment
+
+Deployment of WearCo to heroku:
+[WearCo's deployment](https://wearcorp-app-098bafb41b6f.herokuapp.com/)
+
+Github of WearCo:
+[WearCo's github](https://github.com/cckinwest/Project2-WearCorp.git)
